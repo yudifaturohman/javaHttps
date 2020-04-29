@@ -1,0 +1,32 @@
+import java.io.*;
+import java.net.*;
+
+public class Main {
+    public static void main (String[] args) {
+        try {
+            System.out.println("Menghubungkan...");
+            String httpsWeb = "https://ibank.brisyariah.co.id/";
+            URL url = new URL(httpsWeb);
+            HttpURLConnection con = (HttpURLConnection)
+            url.openConnection();
+            System.out.println("Server Respon");
+            System.out.println("Respon Code:" + 
+            con.getResponseCode());
+            
+            BufferedReader in = new BufferedReader(new InputStreamReader(con.getInputStream()));
+            String line;
+            System.out.println("Data Respon:");
+            while ((line = in.readLine()) !=null)
+            System.out.println(line);
+            in.close();
+            con.disconnect();
+            
+        } catch(UnknownHostException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }catch(IOException e) {
+            System.err.println(e.getMessage());
+            System.exit(1);
+        }
+    }
+}
